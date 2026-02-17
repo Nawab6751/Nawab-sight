@@ -3,67 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAWAB-SIGHT | ENCRYPTED RECON</title>
+    <title>NAWAB-SIGHT | GLOBAL OVERRIDE</title>
     <style>
         body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
         #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
         
         .ui-container { padding: 15px; display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 15px; height: 100vh; }
+        @media (max-width: 768px) { .ui-container { grid-template-columns: 1fr; overflow-y: auto; } }
+
         .panel { border: 1px solid #00ff41; background: rgba(0, 10, 0, 0.9); padding: 12px; position: relative; box-shadow: inset 0 0 10px #00ff4133; }
         
-        /* Security Badge */
         .security-tag { background: #ff0000; color: #fff; font-size: 0.6rem; padding: 2px 5px; position: absolute; top: 0; right: 0; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .header-title { font-size: 1.2rem; font-weight: bold; text-align: center; border-bottom: 1px solid #00ff41; padding-bottom: 5px; margin-bottom: 10px; color: #fff; }
+        .header-title { font-size: 1.1rem; font-weight: bold; text-align: center; border-bottom: 1px solid #00ff41; padding-bottom: 5px; margin-bottom: 10px; color: #fff; text-transform: uppercase; }
         
-        .log-box { font-size: 0.7rem; height: 150px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #003300; padding: 5px; }
+        .log-box { font-size: 0.7rem; height: 140px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #003300; padding: 5px; background: #000; }
         
-        .threat-meter { border: 1px solid #ff0000; height: 20px; position: relative; margin-top: 10px; }
-        .threat-fill { background: #ff0000; width: 75%; height: 100%; box-shadow: 0 0 10px #ff0000; }
+        .threat-meter { border: 1px solid #ff0000; height: 15px; position: relative; margin-top: 5px; background: #200; }
+        .threat-fill { background: #ff0000; width: 88%; height: 100%; box-shadow: 0 0 10px #ff0000; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
 
-        .btn-nawab { width: 100%; padding: 10px; background: transparent; border: 1px solid #00ff41; color: #00ff41; cursor: pointer; font-family: inherit; font-weight: bold; }
+        .btn-nawab { width: 100%; padding: 12px; background: transparent; border: 1px solid #00ff41; color: #00ff41; cursor: pointer; font-family: inherit; font-weight: bold; text-transform: uppercase; }
         .btn-nawab:hover { background: #00ff41; color: #000; box-shadow: 0 0 20px #00ff41; }
 
-        .visualizer { height: 250px; border: 1px solid #00ff41; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #001100 0%, #000 100%); }
+        .visualizer { height: 220px; border: 1px solid #00ff41; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #002200 0%, #000 100%); position: relative; }
+        #coords { font-size: 0.75rem; color: #fff; margin-top: 15px; font-weight: bold; text-shadow: 0 0 5px #00ff41; }
+
+        .footer { position: fixed; bottom: 0; width: 100%; background: #00ff41; color: #000; font-size: 0.65rem; padding: 2px 10px; font-weight: bold; z-index: 100; }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
     
+    <div class="footer">COMMANDER: NAWAB ZADA | SYSTEM: ENCRYPTED | BYPASSING NASA_NET_v4.2</div>
+
     <div class="ui-container">
         <div class="panel">
-            <div class="security-tag">ENCRYPTED</div>
-            <div class="header-title">INTEL FEED</div>
+            <div class="security-tag">SECURE</div>
+            <div class="header-title">Satellite Intel</div>
             <div class="log-box" id="intel-logs">
-                [SYSTEM]: Initializing Neural Link...<br>
-                [NODE]: Pakistan_SEC_Branch<br>
-                [STATUS]: Monitoring Deep-Sea Cables...
+                [SYSTEM]: Booting Nawab-Sight...<br>
+                [AUTH]: Admin Nawab Zada Verified.<br>
+                [SCAN]: Detecting Orbital Nodes...<br>
+                [INFO]: Deep Sea Cables Locked.
             </div>
-            <div style="font-size: 0.7rem;">GLOBAL THREAT LEVEL:</div>
+            <div style="font-size: 0.65rem;">THREAT LEVEL: CRITICAL</div>
             <div class="threat-meter"><div class="threat-fill"></div></div>
         </div>
 
         <div class="panel">
-            <div class="header-title">NAWAB-SIGHT v1.5 [NASA OVERRIDE]</div>
+            <div class="header-title">NASA Mainframe Override</div>
             <div class="visualizer">
-                <div style="font-size: 0.6rem; color: #555;">SATELLITE INTERCEPT ACTIVE</div>
-                <div id="globe-anim" style="color: #00ff41; font-size: 3rem; text-shadow: 0 0 20px #00ff41;">⚡</div>
-                <div id="coords" style="font-size: 0.8rem; margin-top: 10px;">LAT: 33.6844 | LONG: 73.0479</div>
+                <div style="font-size: 0.6rem; color: #00ff41; position: absolute; top: 10px;">REAL-TIME SIGNAL TRACKING</div>
+                <div id="globe-anim" style="color: #00ff41; font-size: 4rem; text-shadow: 0 0 25px #00ff41; animation: spin 5s linear infinite;">📡</div>
+                <div id="coords">INITIALIZING COORDS...</div>
             </div>
-            <button class="btn-nawab" onclick="runAttack()">EXECUTE DEEP SCAN</button>
+            <button class="btn-nawab" onclick="runAttack()">Initiate Global Scan</button>
         </div>
 
         <div class="panel">
-            <div class="header-title">STEALTH MASK</div>
+            <div class="header-title">Identity Mask</div>
             <div class="log-box" id="stealth-logs">
-                [PROXY]: Active (AES-256)<br>
-                [IP]: 192.XXX.XXX.XXX<br>
-                [HIDDEN]: True
+                [ENCRYPTION]: SHA-512 ACTIVE<br>
+                [ORIGIN]: HIDDEN<br>
+                [IP]: 103.XXX.XX.XX<br>
+                [VPN]: Nawab-Tunnel-01
             </div>
-            <div style="font-size: 0.6rem; color: #aaa;">
-                OWNER: NAWAB ZADA<br>
-                PRIVACY: MULTI-LAYERED
+            <div style="font-size: 0.7rem; color: #888; border-top: 1px solid #333; padding-top: 5px;">
+                "Dunya ko Nawab Zada nazar nahi ayega, magar Nawab Zada dunya ko dekh raha hai."
             </div>
         </div>
     </div>
@@ -73,12 +81,12 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "010101NAWABZADA";
+        const letters = "NAWABZADA010101";
         const fontSize = 10;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
         function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.08)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#0F0"; ctx.font = fontSize + "px arial";
             for (let i = 0; i < drops.length; i++) {
                 const text = letters.charAt(Math.floor(Math.random() * letters.length));
@@ -89,13 +97,22 @@
         }
         setInterval(draw, 33);
 
+        // Ghost Signal Logic
+        const cities = ["Washington DC", "Moscow", "Islamabad", "Beijing", "London", "Tokyo", "Berlin", "Paris"];
+        setInterval(() => {
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const lat = (Math.random() * 180 - 90).toFixed(4);
+            const lng = (Math.random() * 360 - 180).toFixed(4);
+            document.getElementById('coords').innerHTML = `NODE: ${randomCity} | LAT: ${lat} | LNG: ${lng}`;
+        }, 2500);
+
         function runAttack() {
             const logs = document.getElementById('intel-logs');
             const stealth = document.getElementById('stealth-logs');
             logs.innerHTML += "<br><span style='color:red'>[!] BYPASSING NASA FIREWALL...</span>";
             setTimeout(() => {
-                logs.innerHTML += "<br>[SUCCESS]: Cloud Data Intercepted.";
-                stealth.innerHTML += "<br>[!] IP HOPPED: Berlin_Server_09";
+                logs.innerHTML += "<br>[SUCCESS]: Satellite Data Harvested.";
+                stealth.innerHTML += `<br>[IP-HOP]: New Node ${cities[Math.floor(Math.random()*cities.length)]}`;
             }, 1500);
         }
     </script>
