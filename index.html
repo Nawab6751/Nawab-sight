@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAWAB-SIGHT | GLOBAL RECON TERMINAL</title>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
+        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+        
+        .ui-container { padding: 20px; display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 20px; height: 100vh; }
+        
+        .panel { border: 1px solid #00ff41; background: rgba(0, 20, 0, 0.8); padding: 15px; box-shadow: 0 0 15px #00ff4133; position: relative; overflow: hidden; }
+        .panel-header { border-bottom: 1px solid #00ff41; margin-bottom: 10px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
+
+        .system-log { font-size: 0.7rem; height: 80%; overflow-y: auto; color: #00ff41; }
+        .map-placeholder { width: 100%; height: 300px; border: 1px dashed #00ff41; display: flex; align-items: center; justify-content: center; position: relative; }
+        
+        .status-bar { position: fixed; bottom: 0; width: 100%; background: #00ff41; color: #000; padding: 2px 10px; font-size: 0.7rem; font-weight: bold; }
+        
+        .glitch-text { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .btn-action { background: transparent; border: 1px solid #00ff41; color: #00ff41; padding: 10px; cursor: pointer; width: 100%; margin-top: 10px; font-family: inherit; }
+        .btn-action:hover { background: #00ff41; color: #000; }
+
+        /* Floating NASA-style HUD elements */
+        .hud-ring { width: 150px; height: 150px; border: 2px solid #00ff41; border-radius: 50%; border-top-color: transparent; animation: spin 4s linear infinite; margin: 20px auto; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="status-bar">SYSTEM STATUS: STEALTH ACTIVE | ENCRYPTION: AES-256 | OWNER: NAWAB ZADA</div>
+
+    <div class="ui-container">
+        <div class="panel">
+            <div class="panel-header"><span>SATELLITE INTERCEPT</span> <span>[LIVE]</span></div>
+            <div class="system-log" id="sat-logs">
+                [SYSTEM]: Initializing NASA-Sight...<br>
+                [CONN]: Routing through 12 Proxies...<br>
+                [INFO]: Global Nodes Detected: 4,892
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header"><span>NAWAB-SIGHT GLOBAL VISUALIZER</span> <span>v1.0</span></div>
+            <div class="map-placeholder">
+                <div class="hud-ring"></div>
+                <div style="position:absolute; font-size:0.6rem; text-align:center;">SCANNING EARTH<br>COORDINATES: LOCKED</div>
+            </div>
+            <input type="text" id="target" placeholder="ENTER GLOBAL COORDINATES..." style="width:100%; background:transparent; border:1px solid #00ff41; color:#fff; padding:10px; margin-top:10px;">
+            <button class="btn-action" onclick="deepScan()">BYPASS NASA FIREWALL</button>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header"><span>STEALTH PROTOCOL</span> <span>[ENCRYPTED]</span></div>
+            <div class="system-log" id="stealth-logs">
+                [IP-MASK]: 192.168.0.1 (HIDDEN)<br>
+                [CURRENT-NODE]: London_UK_04<br>
+                [SECURITY]: Zero-Leak Policy Enabled.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Background Effect
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px arial";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+
+        function deepScan() {
+            const logs = document.getElementById('sat-logs');
+            const stealth = document.getElementById('stealth-logs');
+            
+            logs.innerHTML += "<br><span style='color:white'>[!] ATTEMPTING NASA NODE BYPASS...</span>";
+            setTimeout(() => {
+                logs.innerHTML += "<br>[SUCCESS]: Satellite Feed Intercepted.";
+                stealth.innerHTML += "<br>[ALERT]: New Proxy Tunnel Established via Tokyo.";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
